@@ -10,7 +10,8 @@ def main_screen():
 
 @app.route('/character/<int:character_id>')
 def detail_screen(character_id):
-    character = fetch_character_details(character_id)
+    character_url = f"https://swapi.dev/api/people/{character_id}/"
+    character = fetch_character_details(character_url)
     return render_template('detail_screen.html', character=character)
 
 if __name__ == '__main__':

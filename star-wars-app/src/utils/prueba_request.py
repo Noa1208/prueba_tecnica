@@ -29,3 +29,5 @@ def guardar_json(response, filename):
         print(f"JSON content saved to {filename}")
     except Exception as e:
         print(f"An error occurred while saving the file: {e}")
+
+#puerto de la base de datos = 5432

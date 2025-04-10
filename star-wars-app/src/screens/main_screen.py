@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 import requests
-from services.swapi_service import fetch_characters
+from services.swapi_service import fetch_characters, fetch_character_details
 
 app = Flask(__name__)
 
