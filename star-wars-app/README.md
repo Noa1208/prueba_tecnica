@@ -40,7 +40,10 @@ star-wars-app
    ```bash
    python src/populate_database.py
    ```
-5. **Abrir la aplicación en el navegador**:
+5. **Instalacion de MongoDB shell**
+   instalar MongoDB shell por medio del siguiente enlace: https://www.mongodb.com/try/download/shell
+    
+6. **Abrir la aplicación en el navegador**:
    Accede a la aplicación en tu navegador en la dirección:  
    [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
@@ -63,11 +66,37 @@ star-wars-app
 3. **Interacción con la API**:
    - La aplicación utiliza la API de SWAPI para obtener información en tiempo real sobre los personajes y las películas.
 
+4. **Visualizar los registros de la base de datos**
+   - Luego de realizar la instalacion de mongoDB shell ejecutar:
+   ```bash
+    use star_wars_db
+   ```
+   ```bash
+   show collections
+   ```
+   ```bash
+   db.characters.find().pretty()
+   ```
+
+
 ## Dependencias
 
 El archivo `requirements.txt` incluye todas las librerías necesarias para ejecutar el proyecto. Asegúrate de instalarlas antes de ejecutar la aplicación.
 
 ### Contenido de `requirements.txt`:
 ````plaintext
-Flask==2.3.2
-requests==2.31.0
+blinker==1.9.0
+certifi==2025.1.31
+charset-normalizer==3.4.1
+click==8.1.8
+colorama==0.4.6
+dnspython==2.7.0
+Flask==3.1.0
+idna==3.10
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+pymongo==4.12.0
+requests==2.32.3
+urllib3==2.3.0
+Werkzeug==3.1.3
