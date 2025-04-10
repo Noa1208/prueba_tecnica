@@ -1,17 +1,18 @@
 from flask import Flask, render_template
-from services.swapi_service import fetch_characters, fetch_character_details
+from services.database import get_all_characters, get_character_by_name
 
 app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def main_screen():
-    characters = fetch_characters()
+    characters = get_all_characters()
     return render_template('main_screen.html', characters=characters)
 
-@app.route('/character/<int:character_id>')
-def detail_screen(character_id):
-    character_url = f"https://swapi.dev/api/people/{character_id}/"
-    character = fetch_character_details(character_url)
+@app.route('/character/<name>')
+def detail_screen(name):
+    character = get_character_by_name(name)
+    if not character:
+        return "Personaje no encontrado.", 404
     return render_template('detail_screen.html', character=character)
 
 if __name__ == '__main__':

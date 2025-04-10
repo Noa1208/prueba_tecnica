@@ -1,24 +1,38 @@
 from utils.prueba_request import get_request
+from services.database import insert_character
 
-def fetch_characters():
-    """
-    Fetches the complete list of characters from the SWAPI by iterating through all pages.
-    :return: A list of all characters or None if an error occurs.
-    """
-    url = "https://swapi.dev/api/people/"
-    all_characters = []
+BASE_URL = "https://swapi.dev/api/people/"
 
+def fetch_and_store_characters():
+    """
+    Obtiene todos los personajes de la API de SWAPI y los guarda en MongoDB.
+    """
+    url = BASE_URL
     while url:
         response = get_request(url)
         if response:
             data = response.json()
-            all_characters.extend(data.get('results', []))  # Add characters from the current page
-            url = data.get('next')  # Get the URL for the next page
-        else:
-            print("Error fetching data from SWAPI.")
-            break
+            for character in data['results']:
+                # Obtener los títulos de las películas
+                film_titles = []
+                for film_url in character.get("films", []):
+                    film_response = get_request(film_url)
+                    if (film_response):
+                        film_data = film_response.json()
+                        film_titles.append(film_data.get("title", "Desconocido"))
+                    else:
+                        film_titles.append("Desconocido")
 
-    return all_characters
+                # Reemplazar las URLs de las películas con sus títulos
+                character["films"] = film_titles
+
+                # Guardar el personaje en MongoDB
+                insert_character(character)
+
+            url = data.get('next')  # Ir a la siguiente página si existe
+        else:
+            print("Error al obtener los personajes.")
+            break
 
 def fetch_character_details(character_url):
     """
