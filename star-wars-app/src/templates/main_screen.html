@@ -46,7 +46,7 @@
         <ul>
             {% for character in characters %}
                 <li>
-                    <a href="{{ url_for('detail_screen', character_id=loop.index) }}">
+                    <a href="{{ url_for('detail_screen', name=character['name']) }}">
                         {{ character['name'] }}
                     </a>
                 </li>
