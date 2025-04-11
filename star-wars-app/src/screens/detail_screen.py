@@ -4,8 +4,8 @@ detail_screen = Blueprint('detail_screen', __name__)
 
 @detail_screen.route('/character/<int:character_id>')
 def character_detail(character_id):
-    # Here you would typically fetch the character details using the character_id
-    # For now, we will use placeholder data
+    # Aquí normalmente se obtienen los detalles del personaje usando character_id
+    # Por ahora, usaremos datos de marcador de posición
     character = {
         'name': 'Luke Skywalker',
         'height': '172',
